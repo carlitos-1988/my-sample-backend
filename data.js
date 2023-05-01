@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Data = {};
 
 Data.addItem = async(req, res, next)=>{
-
+    //console.log(req.body);
     try{
         const data = req.body;
         const item = new EmployeeModel(data);
