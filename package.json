@@ -9,6 +9,7 @@
   "author": "Team 2 30198d CodeFellows",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
