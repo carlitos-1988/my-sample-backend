@@ -11,6 +11,8 @@ const Employee = require('./models/employee')
 // email API
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+//Data Model for cleanup of CRUD methods
+const Data = require('./data')
 
 
 const app = express();
@@ -41,22 +43,10 @@ app.get('/', (req, res)=>{
     res.send('The server is working');
 })
 
-app.post('/postemployee',postEmployee)
+app.post('/postemployee', Data.addItem)
+app.get('/getallemployees', Data.getAllItems)
+//Need the get item to be modified in the event there is an error 
 
-async function postEmployee(request, response, next){
-
-    //console.log(request);
-    try{
-        let employeeData = request.body;
-        let createdEmployee = await Employee.create(employeeData);
-
-        response.status(200).send(createdEmployee);
-
-    }catch(e){
-        next(e);
-        //console.log(e);
-    }
-}
 
 //testing email API
 function sendEmail(req,res,next){
@@ -77,12 +67,6 @@ function sendEmail(req,res,next){
         console.error(error)
       })
 }
-
-
-
-
-
-
 
 
 app.get('*', (request, response) => {
